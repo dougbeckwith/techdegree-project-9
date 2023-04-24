@@ -1,10 +1,11 @@
 "use strict";
-
-// load modules
 const express = require("express");
 const morgan = require("morgan");
-const { Sequelize } = require("sequelize");
 const { sequelize } = require("./models/index");
+
+// import routes
+const users = require("./routes/users");
+const courses = require("./routes/courses");
 
 // variable to enable global error logging
 const enableGlobalErrorLogging =
@@ -16,6 +17,15 @@ const app = express();
 // setup morgan which gives us http request logging
 app.use(morgan("dev"));
 
+// parses incoming JSON requests and puts the parsed data in req.body
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true
+  })
+);
+
+// connect to database
 (async () => {
   try {
     await sequelize.authenticate();
@@ -27,12 +37,9 @@ app.use(morgan("dev"));
   }
 })();
 
-// setup a friendly greeting for the root route
-app.get("/", (req, res) => {
-  res.json({
-    message: "Welcome to the REST API project!"
-  });
-});
+// setup routes
+app.use("/api/users", users);
+app.use("/api/courses", courses);
 
 // send 404 if no other route matched
 app.use((req, res) => {
