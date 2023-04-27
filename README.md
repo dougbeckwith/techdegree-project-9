@@ -12,6 +12,10 @@ You will need Node.js to run the project
 - $ npm run seed
 - $ npm start
 
+### Test API
+
+- The RESTAPI.postman_collection.json file can be imported into Postman and used to test the application.
+
 ### Built Using
 
 - SQLite
