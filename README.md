@@ -7,7 +7,7 @@ This REST API provides a way to administer a school database containing informat
 You will need Node.js to run the project
 
 - Download or clone the repository
-- change into the project directory
+- Change into the project directory
 - $ npm install
 - $ npm run seed
 - $ npm start
